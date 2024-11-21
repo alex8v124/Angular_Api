@@ -1,0 +1,63 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Registro de Usuarios</h2>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form [formGroup]="profileForm" (ngSubmit)="selectedUsuarioId ? updateUsuario() : createUsuario()" class="bg-light p-4 rounded shadow">
+        <div class="mb-3">
+          <label for="first-name" class="form-label">Nombre:</label>
+          <input id="first-name" type="text" formControlName="nombre" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="last-name" class="form-label">Apellido:</label>
+          <input id="last-name" type="text" formControlName="apellido" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email:</label>
+          <input id="email" type="email" formControlName="email" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña:</label>
+          <input id="password" type="password" formControlName="password" class="form-control">
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">
+            {{ selectedUsuarioId ? 'Actualizar Usuario' : 'Crear Usuario' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <h3 class="text-center my-4">Lista de Usuarios</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Email</th>
+          <th scope="col">Password</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of usuarioList; track $index) {
+        <tr>
+          <td>{{item.id}}</td>
+          <td>{{item.nombre}}</td>
+          <td>{{item.apellido}}</td>
+          <td>{{item.email}}</td>
+          <td>{{item.password}}</td>
+          <td>
+            <button class="btn btn-warning" (click)="selectUsuario(item)">Editar</button>
+            <button class="btn btn-danger" (click)="deleteUsuario(item?.id?.toString())">Eliminar</button>
+
+          </td>
+        </tr>
+        }
+
+      </tbody>
+    </table>
+  </div>
+</div>
